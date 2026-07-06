@@ -1,0 +1,6 @@
+/node_modules
+/.env
+/wa-engine/.wwebjs_auth
+/wa-engine/.cache
+/web-panel/storage/framework/cache/*
+/web-panel/vendor
