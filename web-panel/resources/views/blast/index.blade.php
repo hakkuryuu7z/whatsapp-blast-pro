@@ -195,7 +195,7 @@
                 }
                 
                 try {
-                    const response = await fetch('http://hakkuryuu7z.my.id:3000/api/send-message', {
+                    const response = await fetch('http://wablast.hakkuryuu7z.my.id:3000/api/send-message', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
