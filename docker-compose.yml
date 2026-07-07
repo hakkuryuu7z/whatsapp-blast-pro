@@ -1,0 +1,58 @@
+version: '3.8'
+services:
+  
+  # 1. Database MySQL
+  db:
+    image: mysql:8.0
+    container_name: wa_blast_db
+    restart: always
+    environment:
+      MYSQL_DATABASE: wa_blast_db
+      MYSQL_ROOT_PASSWORD: Gunungsari13
+      MYSQL_USER: wildan
+      MYSQL_PASSWORD: Gunungsari13
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+  # 2. Aplikasi Laravel (Diupdate ke folder web-panel)
+  app:
+    build:
+      context: ./web-panel    # <--- Berubah ngarah ke folder web-panel
+      dockerfile: Dockerfile
+    container_name: wa_blast_app
+    restart: always
+    working_dir: /var/www
+    volumes:
+      - ./web-panel:/var/www  # <--- Berubah ngarah ke folder web-panel
+    depends_on:
+      - db
+
+  # 3. Nginx (Web Server untuk Laravel)
+  webserver:
+    image: nginx:alpine
+    container_name: wa_blast_nginx
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - ./web-panel:/var/www  # <--- Berubah ngarah ke folder web-panel
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    depends_on:
+      - app
+
+  # 4. WA Engine (Node.js)
+  wa-engine:
+    build:
+      context: ./wa-engine
+      dockerfile: Dockerfile
+    container_name: wa_blast_engine
+    restart: always
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./wa-engine/sessions:/app/sessions
+
+volumes:
+  db_data:
