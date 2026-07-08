@@ -195,7 +195,7 @@
                 }
                 
                 try {
-                    const response = await fetch('https://wablast.hakkuryuu7z.my.id/api/send-message', {
+                    const response = await fetch('https://wablast.hakkuryuu7z.my.id/wa-engine/api/send-message', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
