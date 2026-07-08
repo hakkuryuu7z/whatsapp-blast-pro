@@ -65,7 +65,7 @@
             async function checkStatus() {
                 try {
                     // API sekarang WAJIB bawa parameter session
-                    const response = await fetch(`https://wablast.hakkuryuu7z.my.id:3000/api/status?session=${userId}`);
+                    const response = await fetch(`https://wablast.hakkuryuu7z.my.id/api/status?session=${userId}`);
                     const data = await response.json();
                     
                     errorState.classList.add('hidden');
@@ -104,7 +104,7 @@
             window.logoutDevice = async function() {
                 if (confirm('Yakin ingin mengeluarkan WhatsApp ini?')) {
                     try {
-                        await fetch('https://wablast.hakkuryuu7z.my.id:3000/logout', { 
+                        await fetch('https://wablast.hakkuryuu7z.my.id/logout', { 
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({ session: userId })
